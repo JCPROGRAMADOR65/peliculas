@@ -15,28 +15,29 @@ echo "</pre>";
                 <th>Portada</th>
                 <th>Título</th>
                 <th>Año</th>
-                <th></th>
+                <th>Director</th>
+                <th>País</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($peliculas as $pelicula) { 
-                $imagen = $pelicula['imagen'];
+                $id = $pelicula['id'];
                 $titulo = $pelicula['titulo'];
                 $url = "/peliculas/cliente/pelicula.php?id=$pelicula[id]";
                 $ano = $pelicula['ano'];
                 $director = $pelicula['director'];
-                $paises = explode(";", $pelicula['pais']);
+                $paises = str_replace(";", ", ", $pelicula['pais']);
             ?>
                 <tr>
                     <td>
-                        <img src="/peliculas/cliente/images/<?=$imagen?>">
+                        <img src="/peliculas/cliente/images/<?=$id?>.jpg">
                     </td>
                     <td>
                         <a href="<?=$url?>"><?=$titulo?></a>
                     </td>
-                    <td>1995</td>
-                    <td>Quentin Tarantino</td>
-                    <td>Estados Unidos</td>
+                    <td><?=$ano?></td>
+                    <td><?=$director?></td>
+                    <td><?=$paises?></td>
                 </tr>
             <?php } ?>
         </tbody>

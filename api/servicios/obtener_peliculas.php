@@ -13,14 +13,14 @@
 			//$parametrosRecibidos = $objUtilidades->obtenerParametrosPOST();
 
 			//CONSTRUIMOS LA CONSULTA
-			$objConsultaSQL->addCampoSelect('peliculas.imagen',   'imagen');
 			$objConsultaSQL->addCampoSelect('peliculas.id',       'id');
 			$objConsultaSQL->addCampoSelect('peliculas.titulo',   'titulo');
 			$objConsultaSQL->addCampoSelect('peliculas.ano',      'ano');
 			$objConsultaSQL->addCampoSelect('peliculas.pais',     'pais');
 			$objConsultaSQL->addCampoSelect('directores.nombre',  'nombre_director');
-			$objConsultaSQL->addCampoSelect('directores.apellido','apellido_director');
+			$objConsultaSQL->addCampoSelect('directores.apellidos','apellidos_director');
 
+			$objConsultaSQL->addTablaFrom('peliculas'); 
 			// Left join para expandir los datos del director.
 			$objConsultaSQL->addTablaLeftJoin('directores', 
 											  'peliculas.director = directores.id');
@@ -74,7 +74,8 @@
 								"id" => $fila["id"],
                                 "titulo" => $fila["titulo"],
                                 "ano" => $fila["ano"],
-                                "pais" => $fila["pais"]
+                                "pais" => $fila["pais"],
+								"director" => "$fila[nombre_director] $fila[apellidos_director]"
                             );
 						$indice++;
 					}
