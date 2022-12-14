@@ -1,9 +1,5 @@
 <?php 
 include_once('header.php');
-
-echo "<pre>";
-print_r($respuesta['data']['datos']);
-echo "</pre>";
 ?>
 
 <main>
@@ -36,7 +32,11 @@ echo "</pre>";
                         <a href="<?=$url?>"><?=$titulo?></a>
                     </td>
                     <td><?=$ano?></td>
-                    <td><?=$director?></td>
+                    <td>
+                        <a href="/peliculas/cliente/director.php?id=<?=$director['id']?>">
+                            <?=$director['nombre']?> <?=$director['apellidos']?>
+                        </a>
+                    </td>
                     <td><?=$paises?></td>
                 </tr>
             <?php } ?>

@@ -17,6 +17,7 @@
 			$objConsultaSQL->addCampoSelect('peliculas.titulo',   'titulo');
 			$objConsultaSQL->addCampoSelect('peliculas.ano',      'ano');
 			$objConsultaSQL->addCampoSelect('peliculas.pais',     'pais');
+			$objConsultaSQL->addCampoSelect('directores.id',      'id_director');
 			$objConsultaSQL->addCampoSelect('directores.nombre',  'nombre_director');
 			$objConsultaSQL->addCampoSelect('directores.apellidos','apellidos_director');
 
@@ -75,11 +76,15 @@
                                 "titulo" => $fila["titulo"],
                                 "ano" => $fila["ano"],
                                 "pais" => $fila["pais"],
-								"director" => "$fila[nombre_director] $fila[apellidos_director]"
+								"director" => [
+									"id" => $fila["id_director"],
+									"nombre" => $fila["nombre_director"],
+									"apellidos" => $fila["apellidos_director"]
+								]
                             );
 						$indice++;
 					}
-				}		
+				}
 			}
 		}
   		else{

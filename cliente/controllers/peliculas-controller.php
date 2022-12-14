@@ -8,5 +8,5 @@ $respuesta = json_decode($clienteAPI->ejecutar(), true);
 $peliculas = $respuesta['data']['datos'];
 
 
-$templatePath = realpath(__DIR__ . '/../templates/peliculas.php');
+$templatePath = realpath(__DIR__ . '/../templates/peliculas-template.php');
 include_once($templatePath);
