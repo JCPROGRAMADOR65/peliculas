@@ -25,6 +25,14 @@
         case 'obtener_pelicula':
             include_once('servicios/obtener_pelicula.php');
             break;
+
+        case 'obtener_actor':
+            include_once('servicios/obtener_actor.php');
+            break;
+
+        case 'obtener_director':
+            include_once('servicios/obtener_director.php');
+            break;
         //================================================     
         //ELIMINACIONES     
         //================================================     
