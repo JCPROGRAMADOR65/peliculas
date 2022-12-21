@@ -26,6 +26,7 @@
 					'peliculas.id = peliculas_actores.id_pelicula');
 
 			$objConsultaSQL->addCondicionWhere('actores.id', '= ' . $parametrosRecibidos['id']);
+			$objConsultaSQL->addCampoOrderBy('peliculas.ano', 'ASC');
 			//DEBUG. SOLO DESCOMENTAR SI QUERÉIS VER LA CONSULTA QUE SE EJECUTA
 			//AL DESCOMENTAR, NO EJECUTARÁ LA CONSULTA, SOLO LA MOSTRARÁ
 		    //echo $objConsultaSQL->obtenerConsultaSQL();die();
