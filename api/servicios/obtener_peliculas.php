@@ -10,7 +10,7 @@
 		if(constant('TOKEN_WEBSERVICE')==$objConfiguracion->obtenerTokenWebservices()){	
 
 			//Recogemos los parámetros que lleguen por POST (raw y form-data)
-			//$parametrosRecibidos = $objUtilidades->obtenerParametrosPOST();
+			$parametrosRecibidos = $objUtilidades->obtenerParametrosPOST();
 
 			//CONSTRUIMOS LA CONSULTA
 			$objConsultaSQL->addCampoSelect('peliculas.id',       'id');
@@ -25,6 +25,56 @@
 			// Left join para expandir los datos del director.
 			$objConsultaSQL->addTablaLeftJoin('directores', 
 											  'peliculas.director = directores.id');
+
+			if(isset($parametrosRecibidos['ano-desde'])
+				&& is_numeric($parametrosRecibidos['ano-desde'])) {
+				$ano = $parametrosRecibidos['ano-desde'];
+				$objConsultaSQL->addCondicionWhere('ano', ">= $ano", "AND");
+			}
+
+			if(isset($parametrosRecibidos['ano-hasta'])
+				&& is_numeric($parametrosRecibidos['ano-hasta'])) {
+				$ano = $parametrosRecibidos['ano-hasta'];
+				$objConsultaSQL->addCondicionWhere('ano', "<= $ano", "AND");
+			}
+
+			if(isset($parametrosRecibidos['titulo'])) {
+				$titulo = trim($parametrosRecibidos['titulo']);
+				if (strlen($titulo) > 0) {
+					$objConsultaSQL->addCondicionWhere('titulo', "LIKE '%$titulo%'", "AND");
+				}
+			}
+
+			if(isset($parametrosRecibidos['director'])) {
+				$director = trim($parametrosRecibidos['director']);
+				if (strlen($director) > 0) {
+					$objConsultaSQL->addCondicionWhere('(directores.nombre', "LIKE '%$director%' OR directores.nombre LIKE '%$director%')", "AND");
+				}
+			}
+
+			if(isset($parametrosRecibidos['genero'])) {
+				$genero = trim($parametrosRecibidos['genero']);
+				if (strlen($genero) > 0) {
+					$objConsultaSQL->addCondicionWhere('genero', "LIKE '%$genero%'", "AND");
+				}
+			}
+
+			if(isset($parametrosRecibidos['actor'])) {
+				$actor = trim($parametrosRecibidos['actor']);
+
+				if (strlen($actor) > 0) {
+					$subconsultaIn = new clsConsultaSQL();
+					$subconsultaIn->addCampoSelect('peliculas_actores.id_pelicula', 'id_pelicula');
+					$subconsultaIn->addTablaFrom('actores');
+					$subconsultaIn->addTablaLeftJoin('peliculas_actores',
+														 'peliculas_actores.id_pelicula = peliculas.id'
+													   . ' AND peliculas_actores.id_actor = actores.id');
+					$subconsultaIn->addCondicionWhere('actores.nombre', "LIKE '%$actor%'", 'OR');
+					$subconsultaIn->addCondicionWhere('actores.apellidos', "LIKE '%$actor%'", 'OR');
+					$subsql = $subconsultaIn->obtenerConsultaSQL();
+					$objConsultaSQL->addCondicionWhereSecundario('peliculas.id', "IN ($subsql)", "AND");
+				}
+			}
 
 			//DEBUG. SOLO DESCOMENTAR SI QUERÉIS VER LA CONSULTA QUE SE EJECUTA
 			//AL DESCOMENTAR, NO EJECUTARÁ LA CONSULTA, SOLO LA MOSTRARÁ

@@ -2,6 +2,31 @@
 include_once('header.php');
 ?>
 
+<section class="filtro">
+    <h2>Filtrar</h2>
+    <form action="" method="POST">
+        <label for="filtro-titulo">Que contenga en el título: </label>
+        <input id="filtro-titulo" name="titulo" type="text">
+
+        <label for="filtro-genero">Género: </label>
+        <input id="filtro-genero" name="genero" type="text">
+
+        <label for="filtro-director">Director: </label>
+        <input id="filtro-director" name="director" type="text">
+
+        <label for="filtro-actor">Actor: </label>
+        <input id="filtro-actor" name="actor" type="text">
+
+        <label for="filtro-ano-desde">Año (desde): </label>
+        <input id="filtro-ano-desde" type="number" min="1940" max="2025">
+
+        <label for="filtro-ano-hasta">Año (hasta): </label>
+        <input id="filtro-ano-hasta" type="number" min="1940" max="2025">
+
+        <input type="submit" value="Filtrar">
+    </form>
+</section>
+
 <main>
     <h2>Peliculas</h2>
 
