@@ -30,7 +30,7 @@ include_once('header.php');
     <section>
         <h3>Actores</h3>
         <?php foreach ($actores as $id => $nombreApellidos) { ?>
-            <a class="tag_actor" href="/peliculas/cliente/actor.php?id=<?=$id?>">
+            <a class="tag-actor" href="/peliculas/cliente/actor.php?id=<?=$id?>">
                 <?=$nombreApellidos?>
             </a>
         <?php } ?>

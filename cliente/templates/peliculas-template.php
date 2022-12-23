@@ -6,22 +6,24 @@ include_once('header.php');
     <h2>Filtrar</h2>
     <form action="" method="POST">
         <label for="filtro-titulo">Que contenga en el título: </label>
-        <input id="filtro-titulo" name="titulo" type="text">
+        <input id="filtro-titulo" name="titulo" type="text" value="<?=$titulo?>">
 
         <label for="filtro-genero">Género: </label>
-        <input id="filtro-genero" name="genero" type="text">
+        <input id="filtro-genero" name="genero" type="text" value="<?=$genero?>">
 
         <label for="filtro-director">Director: </label>
-        <input id="filtro-director" name="director" type="text">
+        <input id="filtro-director" name="director" type="text" value="<?=$director?>">
 
         <label for="filtro-actor">Actor: </label>
-        <input id="filtro-actor" name="actor" type="text">
+        <input id="filtro-actor" name="actor" type="text" value="<?=$actor?>">
 
         <label for="filtro-ano-desde">Año (desde): </label>
-        <input id="filtro-ano-desde" type="number" min="1940" max="2025">
+        <input id="filtro-ano-desde" name="ano-desde" type="number" 
+                min="1940" max="2025"  value="<?=$anoDesde?>">
 
         <label for="filtro-ano-hasta">Año (hasta): </label>
-        <input id="filtro-ano-hasta" type="number" min="1940" max="2025">
+        <input id="filtro-ano-hasta" name="ano-hasta" type="number" 
+                min="1940" max="2025" value="<?=$anoHasta?>">
 
         <input type="submit" value="Filtrar">
     </form>
