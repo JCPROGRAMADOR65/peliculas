@@ -1,5 +1,12 @@
 <?php
-	
+	function quitarAcentos($str) {
+		return strtr(utf8_decode($str), 
+					utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 
+								'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	}
+
+
+
 	$objBD = new clsBD;
 	$objConfiguracion = new clsConfiguracion;
 	$objUtilidades = new clsUtilidades;
@@ -41,6 +48,7 @@
 			if(isset($parametrosRecibidos['titulo'])) {
 				$titulo = trim($parametrosRecibidos['titulo']);
 				if (strlen($titulo) > 0) {
+					$titulo = quitarAcentos($titulo);
 					$objConsultaSQL->addCondicionWhere('titulo', "LIKE '%$titulo%'", "AND");
 				}
 			}
@@ -48,6 +56,7 @@
 			if(isset($parametrosRecibidos['director'])) {
 				$director = trim($parametrosRecibidos['director']);
 				if (strlen($director) > 0) {
+					$director = quitarAcentos($director);
 					$objConsultaSQL->addCondicionWhere('(directores.nombre', "LIKE '%$director%' OR directores.apellidos LIKE '%$director%')", "AND");
 				}
 			}
@@ -55,6 +64,7 @@
 			if(isset($parametrosRecibidos['genero'])) {
 				$genero = trim($parametrosRecibidos['genero']);
 				if (strlen($genero) > 0) {
+					$genero = quitarAcentos($genero);
 					$objConsultaSQL->addCondicionWhere('genero', "LIKE '%$genero%'", "AND");
 				}
 			}
@@ -62,6 +72,7 @@
 			if(isset($parametrosRecibidos['actor'])) {
 				$actor = trim($parametrosRecibidos['actor']);
 
+				$actor = quitarAcentos($actor);
 				if (strlen($actor) > 0) {
 					$subconsultaIn = new clsConsultaSQL();
 					$subconsultaIn->addCampoSelect('peliculas_actores.id_pelicula', 'id_pelicula');
