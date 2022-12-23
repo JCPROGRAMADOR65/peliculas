@@ -48,7 +48,7 @@
 			if(isset($parametrosRecibidos['director'])) {
 				$director = trim($parametrosRecibidos['director']);
 				if (strlen($director) > 0) {
-					$objConsultaSQL->addCondicionWhere('(directores.nombre', "LIKE '%$director%' OR directores.nombre LIKE '%$director%')", "AND");
+					$objConsultaSQL->addCondicionWhere('(directores.nombre', "LIKE '%$director%' OR directores.apellidos LIKE '%$director%')", "AND");
 				}
 			}
 
